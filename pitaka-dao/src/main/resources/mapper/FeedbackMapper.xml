@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pitaka.www.mapper.FeedbackMapper">
+
+    <!--添加反馈记录-->
+    <insert id="insertFeedback" parameterType="com.pitaka.www.vo.FeedbackVO">
+        INSERT INTO feedback (`series`, `product`, `condition` ,`idea`, `image`, `user`,`career`,`position`,`method`, `country`, `sex`, `age`, `contactinfo`, `iscustomer`, `purchase`, `creator`)
+       VALUES ( #{series}, #{product}, #{condition}, #{idea}, #{image}, #{user},#{career},#{position}, #{method}, #{country}, #{sex}, #{age}, #{contactinfo}, #{iscustomer}, #{purchase}, #{creator})
+    </insert>
+
+
+    <!--删除反馈记录-->
+    <delete id="delFeedback">
+         DELETE FROM feedback WHERE id = #{id}
+
+    </delete>
+
+
+    <!--修改(更新)反馈记录-->
+    <update id="updateFeedback" parameterType="com.pitaka.www.vo.FeedbackVO">
+        UPDATE feedback
+        <set>
+            purchase = #{purchase},
+            <if test="series !=null">`series` = #{series},</if>
+            <if test="product !=null">product = #{product},</if>
+            <if test="condition !=null">`condition` = #{condition},</if>
+            <if test="idea !=null">idea = #{idea},</if>
+            <if test="user !=null">`user` = #{user},</if>
+            <if test="career !=null">`career` = #{career},</if>
+            <if test="position !=null">`position` = #{position},</if>
+            <if test="image !=null">`image` = #{image},</if>
+            <if test="method !=null">method = #{method},</if>
+            <if test="country !=null ">country = #{country},</if>
+            <if test="sex !=null or sex == 0">sex = #{sex},</if>
+            <if test="age !=null ">age = #{age},</if>
+            <if test="contactinfo !=null ">contactinfo = #{contactinfo},</if>
+            <if test="iscustomer !=null">iscustomer = #{iscustomer},</if>
+
+            <if test="creator !=null ">creator = #{creator},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <!--根据id查询反馈记录-->
+    <select id="findFeedbackById" resultType="com.pitaka.www.vo.FeedbackVO">
+       SELECT `id`, `series`, `product`,`condition`, `idea`, `image`, `user`,`career`,`position`, `method`, `country`, `sex`, `age`, `contactinfo`, `iscustomer`, `purchase`, `creator`,DATE_FORMAT(`commitdate`,'%Y-%m-%d %H:%i:%s') commitdate
+       FROM feedback
+       WHERE `id` =#{id}
+   </select>
+
+    <!--分页查询所有记录-->
+    <select id="findAllFeedback" resultType="com.pitaka.www.model.Feedback">
+       SELECT `id`, `series`, `product`, `condition`,`idea`, `image`, `user`, `career`,`position`,`method`, `country`, `sex`, `age`, `contactinfo`, `iscustomer`, `purchase`, `creator`,DATE_FORMAT(`commitdate`,'%Y-%m-%d %H:%i:%s') commitdate
+       FROM feedback
+
+   </select>
+
+    <select id="findFeedbackByString" parameterType="string" resultType="com.pitaka.www.model.Feedback">
+
+       SELECT f.`id`, f.`series`, f.`product`,f.`condition`, f.`idea`, f.`image`, f.`user`,f.`career`,f.`position`, f.`method`, f.`country`, f.`sex`, f.`age`, f.`contactinfo`, f.`iscustomer`, f.`purchase`, f.`creator`,DATE_FORMAT(f.`commitdate`,'%Y-%m-%d %H:%i:%s') commitdate
+        FROM feedback  f
+        LEFT JOIN
+					series s
+        ON
+					f.series = s.id
+		LEFT JOIN
+					product p
+        ON
+					f.product = p.id
+        WHERE
+        s.series_name like  concat('%',#{data},'%')
+        OR
+        p.product_name like  concat('%',#{data},'%')
+        OR
+        f.creator like  concat('%',#{data},'%')
+
+
+    </select>
+
+    <select id="findAllByExcel" resultType="com.pitaka.www.model.FeedbackExcel">
+       SELECT
+            f.`id`, s.series_name series, p.product_name `product`, f.`condition`,f.`idea`, f.`image`, f.`user`, f.`career`,f.`position`,f.`method`, f.`country`, f.`sex`, f.`age`, f.`contactinfo`, f.`iscustomer`, f.`purchase`, f.`creator`,DATE_FORMAT(f.`commitdate`,'%Y-%m-%d %H:%i:%s') commitdate
+        FROM
+	        feedback f
+        LEFT JOIN
+	        series s
+        ON
+	        f.series = s.id
+        LEFT JOIN
+	        product p
+        ON
+	        f.product = p.id
+
+   </select>
+
+
+</mapper>

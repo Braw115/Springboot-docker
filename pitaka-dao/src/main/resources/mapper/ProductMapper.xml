@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pitaka.www.mapper.ProductMapper" >
+
+    <resultMap id="BeanProduct" type="com.pitaka.www.model.Product">
+        <id column="id" property="id"/>
+        <result column="product_name" property="productName"/>
+        <result column="series_id" property="seriesId"/>
+    </resultMap>
+
+    <resultMap id="BeanProductVO" type="com.pitaka.www.vo.ProductVO">
+        <id column="id" property="id"/>
+        <result column="product_name" property="productName"/>
+        <result column="series_id" property="seriesId"/>
+        <result column="series_name" property="seriesName"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BeanProduct">
+       SELECT `id`, `product_name` ,`series_id` FROM product
+   </select>
+
+    <select id="selectBySeriesId" parameterType="int" resultMap="BeanProductVO">
+         SELECT p.`id`, p.`product_name` ,p.`series_id`,s.series_name FROM product p
+         LEFT JOIN
+         series s
+         ON
+         p.`series_id` = s.id
+         WHERE
+         s.id = #{seriesId}
+    </select>
+
+</mapper>

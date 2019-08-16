@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pitaka.www.mapper.SeriesMapper" >
+    <resultMap id="BeanSeries" type="com.pitaka.www.model.Product">
+        <id column="id" property="id"/>
+        <result column="series_name" property="seriesName"/>
+
+    </resultMap>
+    <select id="findAll" resultType="com.pitaka.www.model.Series">
+       SELECT `id`, `series_name`  FROM series
+   </select>
+
+</mapper>
