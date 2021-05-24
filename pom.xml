@@ -33,7 +33,7 @@
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <json-lib>jdk15</json-lib>
         <guava.version>21.0</guava.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.7.0</shiro.version>
         <mysql.version>8.0.16</mysql.version>
         <jackson-databind>2.5.3</jackson-databind>
         <log4j.version>1.2.17</log4j.version>
