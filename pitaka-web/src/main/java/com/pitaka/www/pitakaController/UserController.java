@@ -36,6 +36,10 @@ public class UserController {
         return new ResultUtil().success(map);
     }
 
+    public void test(){
+        System.out.println("test...");
+    }
+
 
 
 

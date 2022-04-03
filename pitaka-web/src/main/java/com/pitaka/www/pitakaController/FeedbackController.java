@@ -32,7 +32,7 @@ public class FeedbackController {
         if (result > 0) {
             return new ResultUtil(200, "添加成功！");
         }
-        return new ResultUtil().error(500, "添加失败！");
+        return ResultUtil.error(500, "添加失败！");
     }
 
     /**

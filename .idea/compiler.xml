@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pitaka-web" />
+        <module name="pitaka-service" />
+        <module name="pitaka-dao" />
+        <module name="pitaka-model" />
+        <module name="pitaka-common" />
+        <module name="pitaka-shiro" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pitaka-common" options="-parameters" />
+      <module name="pitaka-dao" options="-parameters" />
+      <module name="pitaka-model" options="-parameters" />
+      <module name="pitaka-service" options="-parameters" />
+      <module name="pitaka-shiro" options="-parameters" />
+      <module name="pitaka-web" options="-parameters" />
+    </option>
+  </component>
+</project>
